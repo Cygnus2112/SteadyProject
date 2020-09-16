@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import { SafeAreaView, FlatList, StyleSheet, Dimensions, View, ScrollView, Text} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, ScrollView, Text} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Barista = () => {
@@ -24,7 +24,7 @@ const Barista = () => {
               { item.drink }
             </Text>
           </View>
-        )
+        );
       })}
     </ScrollView>
   );

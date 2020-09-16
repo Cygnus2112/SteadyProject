@@ -5,6 +5,8 @@ const initialState = {
   counterItems: [],
 };
 
+let updatedCounter;
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case 'CREATE_DRINK_SUCCESS':
@@ -15,10 +17,19 @@ export default function reducer(state = initialState, action) {
         baristaQueue: newBaristaQueue,
       };
     case 'UPDATE_DRINK_QUEUE':
-      const updated = state.baristaQueue.slice(1);
+      const finishedDrink = state.baristaQueue[0];
+      const updatedQueue = state.baristaQueue.slice(1);
+      updatedCounter = [...state.counterItems, finishedDrink];
       return {
         ...state,
-        baristaQueue: updated,
+        baristaQueue: updatedQueue,
+        counterItems: updatedCounter,
+      };
+    case 'UPDATE_COUNTER':
+      updatedCounter = state.counterItems.slice(1);
+      return {
+        ...state,
+        counterItems: updatedCounter,
       };
     default:
       return state;
