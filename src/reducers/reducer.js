@@ -1,5 +1,3 @@
-import { updateDrinkQueue } from "../actions/actions";
-
 const initialState = {
   baristaQueue: [],
   counterItems: [],
@@ -16,7 +14,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         baristaQueue: newBaristaQueue,
       };
-    case 'UPDATE_DRINK_QUEUE':
+    case 'MAKE_DRINKS_SUCCESS':
       const finishedDrink = state.baristaQueue[0];
       const updatedQueue = state.baristaQueue.slice(1);
       updatedCounter = [...state.counterItems, finishedDrink];
@@ -25,7 +23,7 @@ export default function reducer(state = initialState, action) {
         baristaQueue: updatedQueue,
         counterItems: updatedCounter,
       };
-    case 'UPDATE_COUNTER':
+    case 'PICKUP_DRINK_SUCCESS':
       updatedCounter = state.counterItems.slice(1);
       return {
         ...state,

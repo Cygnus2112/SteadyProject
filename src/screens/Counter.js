@@ -1,18 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Counter = () => {
-  const dispatch = useDispatch();
   const counterItems = useSelector(state => state.counterItems);
-
-  useEffect(() => {
-    if (counterItems.length) {
-      setTimeout(() => {
-        dispatch({ type: 'UPDATE_COUNTER' });
-      }, 3000);
-    }
-  }, [counterItems, dispatch]);
 
   return (
     <View style={{justifyContent: 'center', alignItems: 'center'}}>

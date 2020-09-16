@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import { SafeAreaView, FlatList, StyleSheet, Dimensions, View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 const MenuItem = ({ item, orderDrink }) => {
   return (

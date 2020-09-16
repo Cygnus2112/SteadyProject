@@ -1,13 +1,36 @@
-import { call, put, all, take, takeEvery, takeLatest, delay, select } from 'redux-saga/effects';
+import { put, all, take, takeEvery, actionChannel, delay, select } from 'redux-saga/effects';
 
 import * as actions from '../actions/actions';
 
-function* createDrink( drink ) {
-  try {
-    yield put(actions.createDrinkSuccess(drink));
-  } catch (err) {
-    console.log('get users error: ', err);
+function* makeDrinksSaga() {
+  const requestChan = yield actionChannel(actions.MAKE_DRINKS_REQUEST);
+  while (true) {
+    yield take(requestChan);
+    const state = yield select();
+    if (state.baristaQueue.length) {
+      const drink = state.baristaQueue[0];
+      yield delay(drink.prepTime);
+      yield put(actions.makeDrinksSuccess());
+      yield put(actions.pickupDrinkRequest());
+    }
   }
+}
+
+function* pickupDrinksSaga() {
+  const requestChan = yield actionChannel(actions.PICKUP_DRINK_REQUEST);
+  while (true) {
+    yield take(requestChan);
+    const state = yield select();
+    if (state.counterItems.length) {
+      yield delay(3000);
+      yield put(actions.pickupDrinkSuccess());
+    }
+  }
+}
+
+function* createDrink({ drink }) {
+  yield put(actions.createDrinkSuccess(drink));
+  yield put(actions.makeDrinksRequest());
 }
 
 function* createDrinkSaga() {
@@ -17,5 +40,7 @@ function* createDrinkSaga() {
 export default function* rootSaga() {
   yield all([
     createDrinkSaga(),
+    makeDrinksSaga(),
+    pickupDrinksSaga(),
   ]);
 }

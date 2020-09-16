@@ -6,13 +6,14 @@ import MenuItem from '../components/MenuItem';
 
 const Menu = () => {
   const dispatch = useDispatch();
+
   const orderDrink = (drink, prepTime) => {
     dispatch({
-      type: 'CREATE_DRINK_SUCCESS',
+      type: 'CREATE_DRINK_REQUEST',
       drink: {
         drink,
         prepTime,
-      }
+      },
     });
   };
 
