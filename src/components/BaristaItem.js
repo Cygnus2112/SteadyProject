@@ -5,7 +5,7 @@ const BaristaItem = ({item}) => {
   return (
     <View style={{width: 200, height: 50, justifyContent: 'center', alignItems: 'center'}}>
       <Text>
-     item
+        { item.drink }
       </Text>
     </View>
   )

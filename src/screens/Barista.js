@@ -3,7 +3,7 @@ import { SafeAreaView, FlatList, StyleSheet, Dimensions, View, Text } from 'reac
 import { useSelector, useDispatch } from 'react-redux';
 const BaristaItem = '../components/BaristaItem';
 
-const Barista = ({}) => {
+const Barista = () => {
   const dispatch = useDispatch();
   const baristaQueue = useSelector(state => state.baristaQueue);
 
@@ -19,7 +19,6 @@ const Barista = ({}) => {
   return (
     <View>
       {baristaQueue.map((item, idx) => {
-        console.log('item: ', item);
         return <BaristaItem item={item} key={idx} />;
       })}
     </View>

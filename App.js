@@ -32,26 +32,7 @@ const App: () => React$Node = () => {
     <>
       <Provider store={store}>
         <NavigationContainer>
-          <Tab.Navigator
-            // screenOptions={({ route }) => ({
-            //   tabBarIcon: ({ focused, color, size }) => {
-            //     let iconName;
-            //     if (route.name === 'Users') {
-            //       iconName = 'account-multiple-outline';
-            //     } else if (route.name === 'Feed') {
-            //       iconName = 'format-list-bulleted';
-            //     } else {
-            //       iconName = 'checkbox-multiple-marked-circle-outline';
-            //     }
-            //     return <Icon name={iconName} size={size} color={color} />;
-            //   },
-            // })}
-            // tabBarOptions={{
-            //   labelStyle: {
-            //     fontSize: 14,
-            //   },
-            // }}
-            >
+          <Tab.Navigator>
             <Tab.Screen name="Menu" component={MenuScreen} />
             <Tab.Screen name="Barista" component={BaristaScreen} />
             <Tab.Screen name="Counter" component={CounterScreen} />

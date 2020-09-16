@@ -8,7 +8,7 @@ const Menu = () => {
   const dispatch = useDispatch();
   const orderDrink = (drink, prepTime) => {
     dispatch({
-      type: 'CREATE_DRINK_REQUEST',
+      type: 'CREATE_DRINK_SUCCESS',
       drink,
       prepTime,
     });
