@@ -9,8 +9,10 @@ const Menu = () => {
   const orderDrink = (drink, prepTime) => {
     dispatch({
       type: 'CREATE_DRINK_SUCCESS',
-      drink,
-      prepTime,
+      drink: {
+        drink,
+        prepTime,
+      }
     });
   };
 

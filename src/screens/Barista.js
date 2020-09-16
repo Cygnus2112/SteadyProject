@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { SafeAreaView, FlatList, StyleSheet, Dimensions, View, Text } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, Dimensions, View, ScrollView, Text} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-const BaristaItem = '../components/BaristaItem';
 
 const Barista = () => {
   const dispatch = useDispatch();
@@ -17,11 +16,17 @@ const Barista = () => {
   }, [baristaQueue, dispatch]);
 
   return (
-    <View>
+    <ScrollView>
       {baristaQueue.map((item, idx) => {
-        return <BaristaItem item={item} key={idx} />;
+        return (
+          <View key={idx} style={{width: 200, height: 50, justifyContent: 'center', alignItems: 'center'}}>
+            <Text>
+              { item.drink }
+            </Text>
+          </View>
+        )
       })}
-    </View>
+    </ScrollView>
   );
 };
 
