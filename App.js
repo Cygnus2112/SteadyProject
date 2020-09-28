@@ -7,11 +7,12 @@
  */
 
 import React from 'react';
+import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 
 import MenuScreen from './src/screens/Menu';
 import BaristaScreen from './src/screens/Barista';
@@ -26,17 +27,32 @@ sagaMiddleware.run(rootSaga);
 
 const Tab = createBottomTabNavigator();
 
+const Tabs = () => {
+  const baristaQueue = useSelector(state => state.baristaQueue);
+  const counterItems = useSelector(state => state.counterItems);
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Menu" component={MenuScreen} />
+      <Tab.Screen
+        name="Barista"
+        component={BaristaScreen}
+        options={{tabBarIcon:() => <View><Text style={{fontSize: 20}}>{ baristaQueue.length }</Text></View>}}
+      />
+      <Tab.Screen
+        name="Counter"
+        component={CounterScreen}
+        options={{tabBarIcon:() => <View><Text style={{fontSize: 20}}>{ counterItems.length }</Text></View>}}
+      />
+    </Tab.Navigator>
+  );
+};
 
 const App: () => React$Node = () => {
   return (
     <>
       <Provider store={store}>
         <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen name="Menu" component={MenuScreen} />
-            <Tab.Screen name="Barista" component={BaristaScreen} />
-            <Tab.Screen name="Counter" component={CounterScreen} />
-          </Tab.Navigator>
+          <Tabs />
         </NavigationContainer>
       </Provider>
     </>
